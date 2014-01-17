@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.TransientFaults.WebApi", "Demo.TransientFaults.WebApi\Demo.TransientFaults.WebApi.csproj", "{64093154-2165-4B7C-BDBC-6BFEE32BC749}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.TransientFaults.WebApi.Tests", "Demo.TransientFaults.WebApi.Tests\Demo.TransientFaults.WebApi.Tests.csproj", "{987D9B6D-D1DD-4BCF-8A3A-AC9E63E06A7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64093154-2165-4B7C-BDBC-6BFEE32BC749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64093154-2165-4B7C-BDBC-6BFEE32BC749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64093154-2165-4B7C-BDBC-6BFEE32BC749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64093154-2165-4B7C-BDBC-6BFEE32BC749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{987D9B6D-D1DD-4BCF-8A3A-AC9E63E06A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{987D9B6D-D1DD-4BCF-8A3A-AC9E63E06A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{987D9B6D-D1DD-4BCF-8A3A-AC9E63E06A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{987D9B6D-D1DD-4BCF-8A3A-AC9E63E06A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
