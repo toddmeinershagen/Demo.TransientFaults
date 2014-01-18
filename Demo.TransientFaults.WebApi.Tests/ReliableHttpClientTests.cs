@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using System.Net.Http.Headers;
 using Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling;
+using System.Diagnostics;
 
 namespace Demo.TransientFaults.WebApi.Tests
 {
@@ -65,6 +66,7 @@ namespace Demo.TransientFaults.WebApi.Tests
         {
             var retryStrategy = new Incremental(5, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2));
             var retryPolicy = new RetryPolicy<HttpClientTransientErrorDetectionStrategy>(retryStrategy);
+            retryPolicy.Retrying += TraceRetries;
 
             string actualContent = null;
 
@@ -89,6 +91,13 @@ namespace Demo.TransientFaults.WebApi.Tests
             action.ShouldNotThrow<HttpRequestException>();
             actualContent.Should().Be("{\"Id\":1,\"FirstName\":\"Todd\",\"LastName\":\"Meinershagen\"}");
         }
+
+        private void TraceRetries(object sender, RetryingEventArgs args)
+        {
+            var msg = String.Format("Retry - {0}, Delay:{1}, Exception:{2}\r\n",
+                    args.CurrentRetryCount, args.Delay, args.LastException);
+            Debug.Print(msg, "Information");
+        }
     }
 
     public class HttpClientTransientErrorDetectionStrategy: ITransientErrorDetectionStrategy
@@ -108,7 +117,7 @@ namespace Demo.TransientFaults.WebApi.Tests
                 {
                     Singleton.Instance.Counter++;
 
-                    if (Singleton.Instance.Counter.IsMultipleOf(3))
+                    if (Singleton.Instance.Counter.IsMultipleOf(4))
                     {
                         return Negotiate
                             .WithStatusCode(HttpStatusCode.OK)
