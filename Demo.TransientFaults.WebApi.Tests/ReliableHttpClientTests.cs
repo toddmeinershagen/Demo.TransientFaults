@@ -64,7 +64,9 @@ namespace Demo.TransientFaults.WebApi.Tests
         [Test]
         public void given_call_to_service_with_incremental_retry_strategy_should_succeed_and_return_content()
         {
-            var retryStrategy = new Incremental(5, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2));
+            //var retryStrategy = new FixedInterval(5, TimeSpan.FromSeconds(1));
+            //var retryStrategy = new Incremental(5, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+            var retryStrategy = new ExponentialBackoff(5, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(1));
             var retryPolicy = new RetryPolicy<HttpClientTransientErrorDetectionStrategy>(retryStrategy);
             retryPolicy.Retrying += TraceRetries;
 
@@ -117,7 +119,7 @@ namespace Demo.TransientFaults.WebApi.Tests
                 {
                     Singleton.Instance.Counter++;
 
-                    if (Singleton.Instance.Counter.IsMultipleOf(4))
+                    if (Singleton.Instance.Counter.IsMultipleOf(6))
                     {
                         return Negotiate
                             .WithStatusCode(HttpStatusCode.OK)
