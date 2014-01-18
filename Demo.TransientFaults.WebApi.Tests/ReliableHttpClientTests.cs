@@ -106,7 +106,9 @@ namespace Demo.TransientFaults.WebApi.Tests
         {
             Get["/Customers/{id}"] = (parameters) =>
                 {
-                    if (++Singleton.Instance.Counter % 3 == 0)
+                    Singleton.Instance.Counter++;
+
+                    if (Singleton.Instance.Counter.IsMultipleOf(3))
                     {
                         return Negotiate
                             .WithStatusCode(HttpStatusCode.OK)
